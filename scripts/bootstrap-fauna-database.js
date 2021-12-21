@@ -6,6 +6,9 @@ const q = faunadb.query
 
 console.log(chalk.cyan('Creating your FaunaDB Database...\n'))
 
+console.log("FAUNADB_SERVER_SECRET", process.env.FAUNADB_SERVER_SECRET);
+console.log("process.env.DEPLOY_PRIME_URL", process.env.DEPLOY_PRIME_URL);
+
 // 1. Check for required enviroment variables
 if (!process.env.FAUNADB_SERVER_SECRET) {
   console.log(chalk.yellow('Required FAUNADB_SERVER_SECRET enviroment variable not found.'))
@@ -26,7 +29,7 @@ if (process.env.FAUNADB_SERVER_SECRET) {
 
 /* idempotent operation */
 function createFaunaDB(key) {
-  console.log('Create the fauna database schema!')
+  console.log('Create the fauna database schema!', key)
   const client = new faunadb.Client({
     secret: key
   })
